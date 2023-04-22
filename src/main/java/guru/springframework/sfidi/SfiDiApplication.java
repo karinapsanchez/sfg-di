@@ -1,13 +1,33 @@
 package guru.springframework.sfidi;
 
+import guru.springframework.sfidi.controllers.ConstructorInjectedController;
+import guru.springframework.sfidi.controllers.MyController;
+import guru.springframework.sfidi.controllers.PropertyInjectedController;
+import guru.springframework.sfidi.controllers.SetterInjectedController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
 public class SfiDiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SfiDiApplication.class, args);
+		ApplicationContext ctx=SpringApplication.run(SfiDiApplication.class, args);
+		MyController myController = (MyController) ctx.getBean("myController");
+		//String greeting = myController.sayHello();
+		System.out.println("-------- Primary Bean -----------------------");
+		System.out.println(myController.sayHello());
+		System.out.println("----------------- Property ------------------");
+		PropertyInjectedController propertyInjectedController = (PropertyInjectedController) ctx.getBean("propertyInjectedController");
+		System.out.println(propertyInjectedController.getGreeting());
+
+		System.out.println("----------------- Setter ------------------");
+		SetterInjectedController setterInjectedController = (SetterInjectedController) ctx.getBean("setterInjectedController");
+		System.out.println(setterInjectedController.getGreeting());
+
+		System.out.println("----------------- Constructor ------------------");
+		ConstructorInjectedController constructorInjectedController = (ConstructorInjectedController) ctx.getBean("constructorInjectedController");
+		System.out.println(constructorInjectedController.getGreeting());
 	}
 
 }
