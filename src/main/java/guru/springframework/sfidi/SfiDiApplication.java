@@ -1,9 +1,6 @@
 package guru.springframework.sfidi;
 
-import guru.springframework.sfidi.controllers.ConstructorInjectedController;
-import guru.springframework.sfidi.controllers.MyController;
-import guru.springframework.sfidi.controllers.PropertyInjectedController;
-import guru.springframework.sfidi.controllers.SetterInjectedController;
+import guru.springframework.sfidi.controllers.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -14,7 +11,10 @@ public class SfiDiApplication {
 	public static void main(String[] args) {
 		ApplicationContext ctx=SpringApplication.run(SfiDiApplication.class, args);
 		MyController myController = (MyController) ctx.getBean("myController");
-		//String greeting = myController.sayHello();
+
+		I18nController i18nController =(I18nController) ctx.getBean("i18nController");
+		System.out.println(i18nController.sayHello());
+
 		System.out.println("-------- Primary Bean -----------------------");
 		System.out.println(myController.sayHello());
 		System.out.println("----------------- Property ------------------");
